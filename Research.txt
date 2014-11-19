@@ -1,6 +1,7 @@
 2002Lab4 - Research
 ===================
-Burst Pressure: Safe 100 psi.  (Good condition = 130 psi.  Lucky = 170 psi)
+Burst Pressure: Safe 100 psi = 689475.729 Pa
+(Good condition = 130 psi ~ 900,000 Pa.  Lucky = 170 psi ~ 1,170,000 Pa.)
 WEAR EYE PROTECTION if within 40 feet > 60 psi
 Source: http://www.water-rockets.com/article.pl?106,0
 Secondary: https://answers.yahoo.com/question/index?qid=20070117092755AAGIXfG
