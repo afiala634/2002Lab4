@@ -1,0 +1,22 @@
+2002Lab4 - Research
+===================
+Burst Pressure: Safe 100 psi.  (Good condition = 130 psi.  Lucky = 170 psi)
+WEAR EYE PROTECTION if within 40 feet > 60 psi
+Source: http://www.water-rockets.com/article.pl?106,0
+Secondary: https://answers.yahoo.com/question/index?qid=20070117092755AAGIXfG
+
+2L Bottle Radius: 4.933 cm        = .04933 m
+Cross Sectional Area: 76.47 cm^2  = .007647 m^2
+Source: http://www.answers.com/Q/What_is_the_diameter_of_a_two_liter_bottle
+
+Throat Radius: 
+Throat Area:   .00038 m^2
+Source: Brandon
+
+Optimal amount of water: 29% for a 150 gram rocket, 37% for a 250 gram rocket
+Source: http://www.waterrocketmanual.com/how_they_work.htm
+Comprehensive: http://www.aircommandrockets.com/water.htm
+
+If we get stuck, we can use this:
+* Look at this *
+http://tbpmindset.org/modules/SECME/Rockets/Rockets_Calculations_Manual.pdf
