@@ -1,9 +1,16 @@
 function r = bottleEqn(t, y)
+
+%Variable declaration:
+Pamb = 0;
+At = 0;
+
+
+
 h = y(1);
 v = y(2);
 m = y(3);
 if t < 0
-    error('Negative time, please  do not break physics')
+    error('Negative time, please do not break physics')
 end
 if t >= 0 && t < 0.26
     Ft = 60*t;
