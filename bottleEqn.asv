@@ -1,11 +1,28 @@
 function r = bottleEqn(t, y)
+
+%Variable declaration:
+Pamb = 0; %ambiant pressure
+At = 0; %Area of throat
+vb = 0; %volume of bottle
+WaterRho = 1000; %kg/m^3
+Pnot = 0;  %Initial pressure
+
+
+
+
+
+
 h = y(1);
 v = y(2);
 m = y(3);
-if t < 0
+if t< 0
     error('Negative time, please do not break physics')
 end
-if t >= 0 && t < 0.26
+
+
+%Equation 1:
+
+if v 
     Ft = 60*t;
 elseif t>=0.26 && t< 1.65
     Ft = 15;

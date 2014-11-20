@@ -1,4 +1,6 @@
 %2002 Lab 4 Main function:
+
+%for loop for text coefficients
 tSpan = [0 15];
 [t, y] = ode45('bottleEqn', tspan, [0 0 0.1536]);
 
