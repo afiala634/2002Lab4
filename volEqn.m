@@ -1,0 +1,10 @@
+function [dvdt] = volEqn(t, y)
+totalP = 689000; %pa
+Area = .00038; %Reasearch
+rhoWat = 1000; %kg/m^3
+pa = 8.2960e+04; %pa  using standard atmoshpere
+gamma = 1.4;
+vnot = .002; %m^3
+v = y(1);
+dvdt = cd * Area * sqrt((2/rhoWat)* (totalP * ( (vnot/v)^gamma) - pa));
+dvdt = dvdt';
