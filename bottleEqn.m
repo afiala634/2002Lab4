@@ -29,6 +29,7 @@ if v < vb
 % Phase 2
 elseif v = vb && p<pa
     pend = ?
+    Tend = ?
     p = pend*((mair/mair0)^(gamma));
     Rho = mair/vb;
     T = p/(Rho*R);
@@ -39,13 +40,15 @@ elseif v = vb && p<pa
         Ve = sqrt(gamma*R*Te)
         mdotair = cd*Rhoe*At*Ve; %mass flow of air
         F = mdotair*Ve + (pend - pa)*At; %Thrust
+        Isp = F/mdotair;
     elseif pcrit <= pa
         M = sqrt(((((p/pa)^((gamma-1)/gamma)) - 1)*2)/(gamma -1));
         Te = T*(1 + ((gamma - 1)/2)*M^2);
         Rhoe = Pa/(R*Te);
         Ve = M*sqrt(gamma*R*Te);
          mdotair = cd*Rhoe*At*Ve; %mass flow of air
-         F = mdotair*Ve + (pend - pa)*At; %Thrust
+         F = mdotair*Ve + (pe - pa)*At; %Thrust
+         Isp = F/mdotair;
     end
 else
     Ft = 0;
