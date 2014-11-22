@@ -23,7 +23,8 @@ end
 %Equation 1:
 
 if v 
-    Ft = 60*t;
+    Ft = 2*cd*(P-Pa)*At;
+    Isp = (1/9.81)*sqrt((2*(P-Pa))/WaterRho);
 elseif t>=0.26 && t< 1.65
     Ft = 15;
 else
