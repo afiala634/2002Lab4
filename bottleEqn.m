@@ -1,13 +1,14 @@
 function r = bottleEqn(t, y)
 
 %Variable declaration:
-Pamb = 0; %ambiant pressure
-At = 0; %Area of throat
-vb = 0; %volume of bottle
+Pamb = 8.2960e+04; %ambiant pressure calculated by standard atmo
+At = .00038 ; %Area of throat M^2
+vb = .002; %volume of bottle m^3
 WaterRho = 1000; %kg/m^3
-Pnot = 0;  %Initial pressure
+Pnot = 690000;  %Initial pressure pascals
 R = 287 %J/kg*k gas constant
-
+To = 277.3925; %initial temperature from standard atmo
+mair0 = Pnot*((2/3)*.002)/(R*T0); %Change the 2/3 later
 
 
 
