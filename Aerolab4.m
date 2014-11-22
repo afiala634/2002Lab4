@@ -1,7 +1,7 @@
 %2002 Lab 4 Main function:
 
-tspan1 = [0 30]
-[t, y] = ode45('volEqn', tspan1, [.002]);
+tspan1 = [0 30];
+[t, y] = ode45('volEqn', tspan1, .002);
 
 %for loop for text coefficients
 % tSpan = [0 15];
