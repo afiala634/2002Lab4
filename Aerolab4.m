@@ -1,5 +1,17 @@
 %2002 Lab 4 Main function:
 
+global pAmb aT vB rhoW pNot R tO mAir0 rhoA;
+
+pAmb = 8.2960e+04; %ambiant pressure calculated by standard atmo
+aT = .00038 ; %Area of throat M^2
+vB = .002; %volume of bottle m^3
+rhoW = 1000; %kg/m^3
+pNot = 690000;  %Initial pressure pascals
+R = 287; %J/kg*k gas constant
+tO = 277.3925; %initial temperature from standard atmo
+mAir0 = Pnot*((2/3)*.002)/(R*T0); %Change the 2/3 later
+rhoA = 666;
+
 tspan1 = [0 30];
 [t, y] = ode45('volEqn', tspan1, .002);
 
