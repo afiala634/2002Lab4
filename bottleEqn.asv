@@ -10,15 +10,15 @@ z = r(4);
 v = r(5);
 m = r(6);%mass of rocket
 
-D = rhoA/2*V^2*cd*aB;
-F = 2*cD*(pNot-pAmb)*aT;
-g = -9.81; 
+D = rhoA/2*V^2*cD*aB;
+F = 2*cd*(pNot-pAmb)*aT;
+g = 9.81; 
 
 dRdt(1) = (F - D - m* g *sin(theta))/m;
 dRdt(2) = (-g*cos(theta))/V;
 dRdt(3) = V*cos(theta);
 dRdt(4) = V*sin(theta);
-dRdt(5) = cD*aT*sqrt(2/rhoW * (pNot * ((vB/3)/v)^gamma - pAmb));
+dRdt(5) = cD*aT*sqrt(2/rhoW * (rho * (vB/v)^gamma - pAmb));
 
 if t< 0
     error('Negative time, please do not break physics')
@@ -28,7 +28,7 @@ end
 %Phase 1:
 
 if v < vB
-    dRdt(6) = -cD*aT*sqrt(2*rhoW * (pNot - pAmb))%Mass flow stage 1
+    dRdt(6) = -cd*aT*sqrt(2*rhoW * (p - pa));%Mass flow first stage
     %p = p0*((v0/v)^gamma);
     
     %Isp = (1/9.81)*sqrt((2*(pNot-pAmb))/rhoW);
@@ -36,7 +36,7 @@ if v < vB
 % Phase 2
 elseif v == vB && p < pa
     dRdt(5) = 0;
-    dRdt(6) = -cD*rhoE*aT*vE;
+    dRdt(6) = cD*rhoE*aT*vE;
     %pend = pAirIn(vAirIn/vB)^gamma;
     %Tend = TAirIn(vAirIn/vB)^(gamma-1);
     %p = pend*((mair/mAir0)^(gamma));
