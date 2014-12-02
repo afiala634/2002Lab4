@@ -1,18 +1,21 @@
 function dRdt = bottleEqn(t, r)
 
-%Variable declaration:
+%% Variable declaration:
 global pAmb aT vB rhoW pNot R tO mAir0 rhoA cD rho gamma cd vAir aB test;
 
-V = r(1);
-theta = r(2);
+%Unpack variables:
+V = r(1);%velocity
+theta = r(2);%theta
 x = r(3);
 z = r(4);
-v = r(5);
+v = r(5);%volume
 m = r(6);%mass of rocket
 
-D = rhoA/2*V^2*cd*aB;
-F = 2*cD*(pNot-pAmb)*aT;
+D = rhoA/2*V^2*cd*aB;%Drag
+F = 2*cD*(pNot-pAmb)*aT;%Force
 g = -9.81; 
+
+%% Declare Results that Do not depend on conditional
 %Velocity
 dRdt(1) = (F - D - m* g *sin(theta))/m;
 %Theta
@@ -31,49 +34,52 @@ test = v;
 
 dRdt(5) = cD*aT*sqrt((2/rhoW) * (pNot * ((v/(vB/3))^gamma) - pAmb));
 
+%Check time val
 if t< 0
     error('Negative time, please do not break physics')
 end
 
 
-%Phase 1:
+%% Phase 1:
 
 if v < vB
     dRdt(6) = -cD*aT*sqrt(2*rhoW * (pNot - pAmb));%Mass flow stage 1
     %p = p0*((v0/v)^gamma);
     
     %Isp = (1/9.81)*sqrt((2*(pNot-pAmb))/rhoW);
+
     
-% Phase 2
-elseif v >= vB 
+%% Phase 2
+elseif v >= vB %&& p < pa
      tE = (2/(gamma + 1)) * aT;
      rhoE = pAmb/(R * tE);
-%     vE = M
-    %&& p < pa
-    dRdt(5) = 0;
-    dRdt(6) = -cD*rhoE*aT*vE;
-    pend = pNot(vAir/vB)^gamma;
-    Tend = aT(vAir/vB)^(gamma-1);
-    p = pend*((mair/mAir0)^(gamma));
-    Rho = mair/vB;
+     
+    pend = pNot*(vAir/vB)^gamma;
+    %Tend = aT(vAir/vB)^(gamma-1);
+    p = pend*((m/mAir0)^(gamma));  %mair == m?
+    Rho = m/vB;
     T = p/(Rho*R);
     pcrit = p*((2/(gamma + 1))^(gamma/(gamma -1)));
-    if pcrit > pa
+    if pcrit > pAmb                 %pa = pamb?
         Te = (2/(gamma+1))*T;
         Rhoe = pcrit/(T*Te);
         Ve = sqrt(gamma*R*Te);
         mdotair = cd*Rhoe*aT*Ve; %mass flow of air
-        F = mdotair*Ve + (pend - pa)*aT; %Thrust
+        F = mdotair*Ve + (pend - pAmb)*aT; %Thrust
         Isp = F/mdotair;
-    elseif pcrit <= pa
-        M = sqrt(((((p/pa)^((gamma-1)/gamma)) - 1)*2)/(gamma -1));
+    elseif pcrit <= pAmb
+        M = sqrt(((((p/pAmb)^((gamma-1)/gamma)) - 1)*2)/(gamma -1));
         Te = T*(1 + ((gamma - 1)/2)*M^2);
-        Rhoe = Pa/(R*Te);
+        Rhoe = pAmb/(R*Te);
         Ve = M*sqrt(gamma*R*Te);
          mdotair = cd*Rhoe*aT*Ve; %mass flow of air
-         F = mdotair*Ve + (pe - pa)*aT; %Thrust
+         F = mdotair*Ve + (pend - pAmb)*aT; %Thrust
          Isp = F/mdotair;
     end
+    dRdt(5) = 0;
+    dRdt(6) = -cD*rhoE*aT*Ve;
+   
+%% Phase 3
 else
     dRdt(6) = 0;
     dRdt(5) = 0;
