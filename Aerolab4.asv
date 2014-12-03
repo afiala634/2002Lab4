@@ -3,14 +3,14 @@ clc
 clear all
 close all
 
-global pAmb aT vB rhoW pNot R tO mAir0 rhoA cD rho gamma cd vAir aB test
+global pAmb aT vB rhoW pNot R tO mAir0 rhoA cD rho gamma cd vAir aB test mb
 
 [a, b, c, d] = atmoscoesa(5300);
 pAmb = 8.2960e+04; %ambiant pressure calculated by standard atmo
 aT = .00038 ; %Area of throat M^2
 vB = .002; %volume of bottle m^3
 rhoW = 1000; %kg/m^3
-pNot = 690000;  %Initial pressure pascals
+pNot = 360000;  %Initial pressure pascals
 R = 287; %J/kg*k gas constant
 tO = 277.3925; %initial temperature from standard atmo
 mAir0 = pNot*((2/3)*.002)/(R*tO); %Change the 2/3 later
@@ -27,7 +27,7 @@ mb = 0.15; %kg
 mrIni = mb + rhoW * (vB - vAir) + ( pNot/(R * tO)) * vAir;
 
 tspan1 = [0 30];
-[t, y] = ode45('bottleEqn', tspan1, [.002, (pi/4), 0, 0, vAir, mrIni] );
+[t, y] = ode45('bottleEqn', tspan1, [0, (pi/4), 0, 0, vAir, mrIni, .0044] );
 
 %for loop for text coefficients
 % tSpan = [0 15];
@@ -57,13 +57,16 @@ legend('Mass', 'Location', 'South')
 
 figure(fignum + 3)
 plot(t, y(:, 4))
-title('z'
+title('z')
 
 figure(fignum + 4)
 plot(t, y(:, 5))
+title('v')
+
 
 figure(fignum + 5)
 plot(t, y(:, 6))
+title('m')
 % 
 % [peaks, loc] = findpeaks(y(:, 1));
 % tindex = t(loc);

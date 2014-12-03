@@ -3,23 +3,24 @@ clc
 clear all
 close all
 
-global pAmb aT vB rhoW pNot R tO mAir0 rhoA cD rho gamma cd vAir aB test
+global pAmb aT vB rhoW pNot R tO mAir0 rhoA cD rho gamma cd vAir aB test mb
 
 [a, b, c, d] = atmoscoesa(5300);
 pAmb = 8.2960e+04; %ambiant pressure calculated by standard atmo
 aT = .00038 ; %Area of throat M^2
 vB = .002; %volume of bottle m^3
 rhoW = 1000; %kg/m^3
-pNot = 690000;  %Initial pressure pascals
+pNot = 360000;  %Initial pressure pascals
 R = 287; %J/kg*k gas constant
+vAir = (2/3) * vB;
 tO = 277.3925; %initial temperature from standard atmo
-mAir0 = pNot*((2/3)*.002)/(R*tO); %Change the 2/3 later
+mAir0 = (pNot /R / tO) * vAir; %Change the 2/3 later
 rhoA = 1.04186;%Density from standard atmosphere
 cD = .9; %discharge coef
 rho = a;
 gamma = 1.4;
 cd = .3; %drag coef
-vAir = (2/3) * vB;
+
 aB = pi*(.05^2);
 test = zeros(1);
 mb = 0.15; %kg
@@ -27,7 +28,7 @@ mb = 0.15; %kg
 mrIni = mb + rhoW * (vB - vAir) + ( pNot/(R * tO)) * vAir;
 
 tspan1 = [0 30];
-[t, y] = ode45('bottleEqn', tspan1, [0, (pi/4), 0, 0, vAir, mrIni] );
+[t, y] = ode45('bottleEqn', tspan1, [0, (pi/4), 0, 0.1, vAir, 1.15, .0044] );
 
 %for loop for text coefficients
 % tSpan = [0 15];
